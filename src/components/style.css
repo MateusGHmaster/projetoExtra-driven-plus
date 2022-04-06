@@ -1,0 +1,9 @@
+body {
+
+    background-color: black;
+    overflow: hidden;
+    height: 100vh;
+    
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca&family=Roboto&display=swap');

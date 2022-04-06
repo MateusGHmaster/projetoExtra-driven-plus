@@ -3,8 +3,9 @@ import Register from './Register';
 import Subscriptions from './Subscriptions';
 import SubscriptionsInfo from './SubscriptionsInfo';
 import Home from './Home';
+import './components/style.css';
 import { AuthContextProvider } from './providers/AuthContext';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 export default function App () {
 
