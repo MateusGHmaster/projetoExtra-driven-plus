@@ -1,9 +1,10 @@
 import Logo from './Logo';
 import Input from './Input';
 import Button from './Button';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { AuthContext } from './providers/AuthContext';
 import LoadingSpin from 'react-loading-spin';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -16,6 +17,7 @@ export default function Login () {
     const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
+    const { setToken, setUser } = useContext(AuthContext);
 
     function refreshOnError () {
 
@@ -34,7 +36,8 @@ export default function Login () {
         promise.then (response => {
             setLoading(false);
             const { data } = response;
-            localStorage.setItem('userToken', data.token);
+            setToken(data.token);
+            setUser(data);
             data.membership === null ? navigate('/subscriptions') : navigate('/home'); 
         })
 
