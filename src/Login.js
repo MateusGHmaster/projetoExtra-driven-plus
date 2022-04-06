@@ -59,7 +59,7 @@ export default function Login () {
                     ) 
                 }
             </Button>
-            <StyledLink to='/register'>Não possui uma conta? Cadastre-se!</StyledLink>
+            <StyledLink to='/sign-up'>Não possui uma conta? Cadastre-se!</StyledLink>
         </LoginContainer>
 
     );

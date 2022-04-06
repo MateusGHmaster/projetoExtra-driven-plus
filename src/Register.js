@@ -69,7 +69,7 @@ export default function Register () {
 
 const RegisterContainer = styled.div`
 
-    margin-top: 75px;
+    margin-top: 200px;
     margin-left: 7px;
     height: 100%;
     width: 375px;
@@ -77,16 +77,18 @@ const RegisterContainer = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    font-family: 'Roboto', sans-serif;
 
 `;
 
 const StyledLink = styled(Link)`
 
+    margin-top: 15px;
     height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #52B6FF;
+    color: #FFFFFF;
     font-family: 'Roboto', sans-serif;
 
 `;
