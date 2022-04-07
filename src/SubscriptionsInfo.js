@@ -4,6 +4,7 @@ import Arrow from './components/ArrowBack.svg';
 import PerksBlock from './components/Perks.svg';
 import PriceBlock from './components/Price.svg';
 import Button from './Button';
+import Modal from './Modal';
 import { AuthContext } from './providers/AuthContext';
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate, Link, useParams } from 'react-router-dom';
@@ -15,6 +16,7 @@ export default function SubscriptionsInfo () {
     const [cardNumber, setCardNumber] = useState ('');
     const [security, setSecurity] = useState ('');
     const [date, setDate] = useState ('');
+    const [modal, setModal] = useState (false);
     const { token } = useContext(AuthContext);
 
     const navigate = useNavigate();
@@ -120,8 +122,9 @@ export default function SubscriptionsInfo () {
                 </SmallSizeInputs>
             </BuyerCredentials>
             <Order>
-                <Button onClick={() => {}}>ASSINAR</Button>
+                <Button onClick={() => {setModal(true)}}>ASSINAR</Button>
             </Order>
+            {modal && <Modal setModal={setModal} name={subInfo.name} price={subInfo.price} />}
 
         </>
 
@@ -213,7 +216,7 @@ const PriceList = styled.div`
 
 const BuyerCredentials  = styled.div`
 
-    margin-top: 50px;
+    margin-top: 35px;
     display: flex;
     flex-direction: column;
     align-items: center;
