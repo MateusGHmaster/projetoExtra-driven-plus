@@ -17,7 +17,7 @@ export default function App () {
                     <Route path='/' element={<Login setToken={() => {}}/>}/>
                     <Route path='/sign-up' element={<Register />}/>
                     <Route path='/subscriptions' element={<Subscriptions token={''} />}/>
-                    <Route path='/subscriptions/id' element={<SubscriptionsInfo token={''} />}/>
+                    <Route path='/subscriptions/:subscriptionID' element={<SubscriptionsInfo token={''} />}/>
                     <Route path='/home' element={<Home token={''} />}/>
                 </Routes>
             </BrowserRouter>

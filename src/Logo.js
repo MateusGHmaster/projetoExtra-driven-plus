@@ -15,7 +15,7 @@ export default function Logo () {
 
 const LoginLogo = styled.div`
 
-    margin-top: -200px;
+    margin-top: -100px;
     display: flex;
     flex-direction: column;
     margin-bottom: 150px;
