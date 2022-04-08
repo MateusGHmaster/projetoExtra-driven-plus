@@ -4,7 +4,7 @@ import Arrow from './components/ArrowBack.svg';
 import PerksBlock from './components/Perks.svg';
 import PriceBlock from './components/Price.svg';
 import Button from './Button';
-import Modal from './Modal';
+/* import Modal from './Modal'; */
 import { AuthContext } from './providers/AuthContext';
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate, Link, useParams } from 'react-router-dom';
@@ -16,7 +16,8 @@ export default function SubscriptionsInfo () {
     const [cardNumber, setCardNumber] = useState ('');
     const [security, setSecurity] = useState ('');
     const [date, setDate] = useState ('');
-    const [modal, setModal] = useState (false);
+    const [ordered, setOrdered] = useState ('');
+    /* const [modal, setModal] = useState (false); */
     const { token } = useContext(AuthContext);
 
     const navigate = useNavigate();
@@ -55,6 +56,7 @@ export default function SubscriptionsInfo () {
     }, [])
 
     function showPerks () {
+
         console.log(subInfo.perks);
         return subInfo.perks.map(perk => {
             const { title } = perk;
@@ -64,6 +66,7 @@ export default function SubscriptionsInfo () {
                 </>
             );
         });
+
     }
 
     function makeOrder () {
@@ -75,11 +78,13 @@ export default function SubscriptionsInfo () {
         securityNumber: security,
         expirationDate: date
         },config);
+
         promise.then (response => {
             const {data} = response;
             console.log(data);
-            setSubInfo(data);
+            setOrdered(data);
         })
+
         promise.catch (err => {
             console.log(err.response);
             alert ('Algo deu errado. Vamos tentar de novo.  ಥ﹏ಥ ');
@@ -122,9 +127,13 @@ export default function SubscriptionsInfo () {
                 </SmallSizeInputs>
             </BuyerCredentials>
             <Order>
-                <Button onClick={() => {setModal(true)}}>ASSINAR</Button>
+                <Button onClick={() => {
+                    if (window.confirm('Quer fazer essa assinatura?') === true) {
+                        navigate('/home');
+                        makeOrder(); 
+                    }}}>ASSINAR</Button>
             </Order>
-            {modal && <Modal setModal={setModal} name={subInfo.name} price={subInfo.price} />}
+            {/* {modal && <Modal setModal={setModal} name={subInfo.name} price={subInfo.price} />} */}
 
         </>
 
