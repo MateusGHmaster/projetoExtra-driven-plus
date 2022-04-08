@@ -33,7 +33,6 @@ export default function Register () {
         promise.then (response => {
             setLoading(false);
             const { data } = response;
-            console.log(data);
             navigate('/'); 
         })
 

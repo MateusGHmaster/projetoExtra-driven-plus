@@ -4,7 +4,7 @@ import Arrow from './components/ArrowBack.svg';
 import PerksBlock from './components/Perks.svg';
 import PriceBlock from './components/Price.svg';
 import Button from './Button';
-/* import Modal from './Modal'; */
+import Modal from './Modal';
 import { AuthContext } from './providers/AuthContext';
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate, Link, useParams } from 'react-router-dom';
@@ -17,8 +17,8 @@ export default function SubscriptionsInfo () {
     const [security, setSecurity] = useState ('');
     const [date, setDate] = useState ('');
     const [ordered, setOrdered] = useState ('');
-    /* const [modal, setModal] = useState (false); */
-    const { token } = useContext(AuthContext);
+    const [modal, setModal] = useState (false);
+    const { token, user, setUser } = useContext(AuthContext);
 
     const navigate = useNavigate();
     const { id } = useParams();
@@ -38,11 +38,9 @@ export default function SubscriptionsInfo () {
         const promise = axios.get (`https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions/memberships/${id}`, config);
         promise.then (response => {
             const {data} = response;
-            console.log(data);
             setSubInfo(data);
         })
         promise.catch (err => {
-            console.log(err.response);
             alert ('Algo deu errado. Vamos tentar de novo.  ಥ﹏ಥ ');
             navigate('/');
         });
@@ -57,7 +55,6 @@ export default function SubscriptionsInfo () {
 
     function showPerks () {
 
-        console.log(subInfo.perks);
         return subInfo.perks.map(perk => {
             const { title } = perk;
             return (
@@ -81,12 +78,12 @@ export default function SubscriptionsInfo () {
 
         promise.then (response => {
             const {data} = response;
-            console.log(data);
-            setOrdered(data);
+            console.log({ ...user, membership: data.membership });
+            setUser({ ...user, membership: data.membership });
+            navigate('/home');
         })
 
         promise.catch (err => {
-            console.log(err.response);
             alert ('Algo deu errado. Vamos tentar de novo.  ಥ﹏ಥ ');
             navigate('/');
         });
@@ -127,13 +124,12 @@ export default function SubscriptionsInfo () {
                 </SmallSizeInputs>
             </BuyerCredentials>
             <Order>
-                <Button onClick={() => {
+                <Button onClick={() => {setModal(true)}}/*
                     if (window.confirm('Quer fazer essa assinatura?') === true) {
-                        navigate('/home');
                         makeOrder(); 
-                    }}}>ASSINAR</Button>
+                    }}} */>ASSINAR</Button>
             </Order>
-            {/* {modal && <Modal setModal={setModal} name={subInfo.name} price={subInfo.price} />} */}
+            {modal && <Modal setModal={setModal} makeOrder={makeOrder()} name={subInfo.name} price={subInfo.price} />}
 
         </>
 

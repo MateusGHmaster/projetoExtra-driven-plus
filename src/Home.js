@@ -9,22 +9,74 @@ import axios from 'axios';
 
 export default function Home () {
 
-    
+    const navigate = useNavigate();
+    const { user, setUser, token } = useContext(AuthContext);
+
+    const config = {
+
+        headers: {
+
+            Authorization: `Bearer ${token}` 
+        
+        }
+
+    };
+
+    function showPerks () {
+
+        if (user.membership.perks !== undefined) {
+
+            if(user.membership.perks.length > 0) {
+                return user.membership.perks.map(perk => {
+                    const { title, link } = perk;
+                    return (
+                        <>
+                            <a href={link} target={'_blank'}>{title}</a>
+                        </>
+                    );
+                });
+            }
+
+        }
+    }
+
+    function deleteSubscription () {
+
+        const promise = axios.delete ('https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions', config);
+
+        promise.then (response => {
+            /* setLoading(false); */
+            console.log({ ...user, membership: {perks: []} });
+            setUser({ ...user, membership: {perks: []} });
+            navigate('/subscriptions');
+        })
+
+        promise.catch (err => {
+            /* setLoading(false); */
+            console.log(err);
+            alert('Sentimos muito, mas correu um erro ao cancelar seu plano atual. Por favor, tente novamente.   ( 0 _ 0 )');
+        })
+
+    }
 
     return (
         <>
             <HomeHeader>
-                <SubSelectedLogo>LOGO</SubSelectedLogo>
+                <SubSelectedLogo>
+                    <img src={user.membership.image} height={34} width={34} alt={'fsds'}/>
+                </SubSelectedLogo>
                 <ProfileIcon>
                     <img src={Icon} height={34} width={34} alt={'sub-visual'}/>
                 </ProfileIcon>
             </HomeHeader>
             <HomeBody>
-                <HomeTitle>Olá, Miyazaki</HomeTitle>
-                <PerksButtons></PerksButtons>
+                <HomeTitle>Olá, {user.name}</HomeTitle>
+                <PerksButtons>
+                    {showPerks()}
+                </PerksButtons>
                 <NavigationButtons>
-                    <Button>Mudar plano</Button>
-                    <Button>Cancelar plano</Button>
+                    <Button onClick={() => navigate('/subscriptions')}>Mudar plano</Button>
+                    <Button onClick={deleteSubscription}>Cancelar plano</Button>
                 </NavigationButtons>
             </HomeBody>
         </>
@@ -57,7 +109,6 @@ const SubSelectedLogo = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: green;
     font-family: 'Roboto', sans-serif;
     color: #FFFFFF;
 

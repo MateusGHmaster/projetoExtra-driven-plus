@@ -1,8 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import Subscription from './Subscription';
+import { useNavigate } from 'react-router-dom';
 
-function Modal({ setModal, name, price }) {
+function Modal({ setModal, name, price, makeOrder }) {
+
+  const navigate = useNavigate();
 
   return (
 
@@ -13,7 +16,9 @@ function Modal({ setModal, name, price }) {
           <CancelButton onClick={() => {
               setModal(false);
             }}>Não</CancelButton>
-          <ConfirmButton>Sim</ConfirmButton>
+          <ConfirmButton onClick={() => {
+            makeOrder();
+            }}>Sim</ConfirmButton>
         </ModalBody>
     </ModalContainer>
   );

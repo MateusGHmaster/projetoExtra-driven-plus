@@ -27,11 +27,9 @@ export default function Subscriptions () {
         const promise = axios.get ('https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions/memberships', config);
         promise.then (response => {
             const {data} = response;
-            console.log(data);
             setSubscriptions(data);
         })
         promise.catch (err => {
-            console.log(err.response);
             alert ('Algo deu errado. Vamos tentar de novo.  ╭( ･ㅂ･)و');
             navigate('/');
         });

@@ -45,7 +45,7 @@ export default function Login () {
             setLoading(false);
             console.log(err);
             alert('Sentimos muito, mas correu um erro. Por favor, tente novamente.   ( 0 _ 0 )');
-            refreshOnError();
+            /* refreshOnError(); */
         })
     }
 

@@ -6,7 +6,7 @@ export function AuthContextProvider ({ children }) {
 
     const [token, setToken] = useState('');
     const [user, setUser] = useState({ 
-        membership: {}
+        membership: {perks: []}
     }); 
 
     return (
