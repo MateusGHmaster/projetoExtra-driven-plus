@@ -124,12 +124,9 @@ export default function SubscriptionsInfo () {
                 </SmallSizeInputs>
             </BuyerCredentials>
             <Order>
-                <Button onClick={() => {setModal(true)}}/*
-                    if (window.confirm('Quer fazer essa assinatura?') === true) {
-                        makeOrder(); 
-                    }}} */>ASSINAR</Button>
+                <Button onClick={() => {setModal(true)}}>ASSINAR</Button>
             </Order>
-            {modal && <Modal setModal={setModal} makeOrder={makeOrder()} name={subInfo.name} price={subInfo.price} />}
+            {modal && <Modal setModal={setModal} makeOrder={makeOrder} name={subInfo.name} price={subInfo.price} />}
 
         </>
 

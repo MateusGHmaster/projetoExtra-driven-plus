@@ -31,7 +31,7 @@ export default function Home () {
                     const { title, link } = perk;
                     return (
                         <>
-                            <a href={link} target={'_blank'}>{title}</a>
+                            <PerksButton href={link} target={'_blank'}>{title}</PerksButton>
                         </>
                     );
                 });
@@ -63,7 +63,7 @@ export default function Home () {
         <>
             <HomeHeader>
                 <SubSelectedLogo>
-                    <img src={user.membership.image} height={34} width={34} alt={'fsds'}/>
+                    <img src={user.membership.image} height={60} width={60} alt={'fsds'}/>
                 </SubSelectedLogo>
                 <ProfileIcon>
                     <img src={Icon} height={34} width={34} alt={'sub-visual'}/>
@@ -104,8 +104,8 @@ const HomeHeader = styled.div`
 const SubSelectedLogo = styled.div`
 
     margin-left: 15px;
-    height: 50px;
-    width: 50px;
+    height: 60px;
+    width: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -141,6 +141,7 @@ const HomeTitle = styled.div`
 
 const PerksButtons = styled.div`
 
+    margin-top: 60px;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -148,9 +149,26 @@ const PerksButtons = styled.div`
 
 `;
 
+const PerksButton = styled.a`
+
+    width: 360px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: 'Roboto', sans-serif;
+    color: #FFFFFF;
+    background: #FF4791;
+    border-radius: 8px;
+    text-decoration: none;
+
+`;
+
 const NavigationButtons = styled.div`
 
-    margin-top: 500px;
+    position: fixed;
+    margin-top: 600px;
     display: flex;
     align-items: center;
     flex-direction: column;
